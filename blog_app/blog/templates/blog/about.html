@@ -1,0 +1,33 @@
+{% extends "blog/base.html" %}
+
+{% block title %}About - My Blog{% endblock %}
+
+{% block content %}
+<section class="about-section">
+    <div class="about-container">
+        <h1>About This Blog</h1>
+        <p>
+            Welcome to <strong>My Blog</strong> — a space where I share stories, tutorials, 
+            and ideas about tech, creativity, and life.  
+            This blog was created to inspire, educate, and connect with readers from around the world.
+        </p>
+        
+        <h2>Our Mission</h2>
+        <p>
+            To provide high-quality, insightful, and easy-to-understand content 
+            for developers, tech enthusiasts, and lifelong learners.
+        </p>
+
+        <h2>About Me</h2>
+        <p>
+            Hi, I’m <strong>{{ author_name }}</strong> — a passionate writer and developer.  
+            When I’m not coding or writing, I enjoy reading, exploring nature, 
+            and experimenting with new recipes.
+        </p>
+
+        <div class="about-image">
+            <img src="" alt="About Me">
+        </div>
+    </div>
+</section>
+{% endblock %}
