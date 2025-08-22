@@ -1,0 +1,15 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card text-center shadow p-5" style="max-width: 400px; width: 100%;">
+    <h4 class="mb-3 text-danger">Are you sure you want to logout?</h4>
+    <form method="POST">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger w-100 mb-2">Logout</button>
+    </form>
+    <a href="{% url 'blog-home' %}" class="btn btn-outline-secondary w-100">Cancel</a>
+  </div>
+</div>
+{% endblock %}

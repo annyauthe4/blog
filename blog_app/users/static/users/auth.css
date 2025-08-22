@@ -1,0 +1,105 @@
+/* Auth Page Styling (register, login, logout) */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  padding: 20px;
+}
+
+.auth-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+.auth-title {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+  font-family: 'Georgia', serif;
+}
+
+form p {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+form input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+form input:focus {
+  border-color: #0d6efd;
+}
+
+.btn-auth {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 8px;
+  background: #0d6efd;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-auth:hover {
+  background: #0b5ed7;
+}
+
+.auth-text {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.auth-text a {
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+.auth-text a:hover {
+  text-decoration: underline;
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .auth-title {
+    font-size: 22px;
+  }
+
+  form input {
+    padding: 10px;
+  }
+
+  .btn-auth {
+    padding: 10px;
+    font-size: 15px;
+  }
+}
