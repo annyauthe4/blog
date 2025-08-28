@@ -15,12 +15,12 @@ body {
     font-family: "Segoe UI", Tahoma, sans-serif;
     line-height: 1.6;
     color: #222;
-    background-color: #f9f9f9;
+    background-color: rgba(249, 249, 249, 1);
 }
 
 /* Header */
 header {
-    background: #222;
+    background: rgba(11, 11, 11, 0.7);
     color: #fff;
     padding: 1rem 2rem;
     position: sticky;
@@ -46,7 +46,7 @@ header nav {
 }
 
 .nav-left a:hover {
-    color: #ff9800;
+    color: rgba(255, 152, 0, 0.3);
 }
 .nav-right a {
     color: #fff;
@@ -69,7 +69,19 @@ header nav {
 }
 
 .register-btn:hover {
-    background: #e68900;
+    background: rgba(230, 137, 0, 0.5);
+}
+.logout-btn {
+  background: rgba(10, 16, 184, 0.5);
+  color: #f1ecec; /* same as nav links */
+  font: inherit;
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+}
+
+.logout-btn:hover {
+  color: rgba(4, 5, 3, 0.5); /* your accent color */
 }
 
 /* Main Content */
@@ -99,7 +111,7 @@ article div {
 
 /* Footer */
 footer {
-    background: #222;
+    background: rgba(34, 34, 34, 0.5);
     color: #ccc;
     text-align: center;
     padding: 1rem 0;

@@ -1,23 +1,21 @@
 {% extends "blog/base.html" %}
-{% load static %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 <div class="container d-flex justify-content-center align-items-center vh-100">
-  <div class="card shadow p-4" style="max-width: 400px; width: 100%;">
-    <h3 class="text-center mb-4 text-success">Welcome Back</h3>
+  <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%;">
+    <h3 class="text-center mb-4 text-primary">Login</h3>
     <form method="POST">
       {% csrf_token %}
-      <div class="mb-3">
-        <label for="id_username" class="form-label">Username</label>
-        <input type="text" name="username" class="form-control" id="id_username" required>
-      </div>
-      <div class="mb-3">
-        <label for="id_password" class="form-label">Password</label>
-        <input type="password" name="password" class="form-control" id="id_password" required>
-      </div>
+      {{ form|crispy }}
       <button type="submit" class="btn btn-success w-100">Login</button>
     </form>
-    <p class="text-center mt-3">Don’t have an account? <a href="{% url 'register' %}">Sign up</a></p>
+    <p class="text-center mt-3">
+      Don’t have an account? <a href="{% url 'register' %}">Sign Up</a>
+    </p>
+    <p class="text-center mt-2">
+      <a href="">Forgot Password?</a>
+    </p>
   </div>
 </div>
 {% endblock %}
