@@ -2,10 +2,26 @@
 
 {% block content %}
     {% for post in posts %}
-        <article>
-                <h1>{{ post.title }}</h1>
-                <p>{{ post.date_posted }}</p>
-                <div>{{ post.content }}</div>
-        </article>
+        <article class="post-card mb-5 p-4 shadow-sm" data-aos="fade-up"
+     data-aos-anchor-placement="bottom-bottom" data-aos-offset="300 + {{ post.id }}"
+     data-aos-easing="ease-in-sine">
+                <!-- Title + Author -->
+                <div class="d-flex align-items-center mb-2">
+                        <img src="{{ post.author.profile.image.url }}" 
+                                alt="{{ post.author.username }}" 
+                                class="rounded-circle author-img">
+                        <div class="ms-3">
+                        <h2 class="post-title mb-1"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+                        <small class="text-muted">
+                                Posted on {{ post.date_posted|date:"F d, Y" }} by {{ post.author.username }}
+                        </small>
+                        </div>
+                </div>
+
+                <!-- Post content/excerpt -->
+                <p class="post-content">
+                {{ post.content|truncatewords:40 }}
+                </p>
+      </article>
     {% endfor %}
 {% endblock %}

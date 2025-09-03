@@ -1,0 +1,17 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card shadow-lg p-4" style="max-width: 450px; width: 100%;">
+    <h3 class="text-center mb-4 text-primary">Delete Post</h3>
+    <form method="POST">
+      {% csrf_token %}
+      <h2>Are you sure you want to delete the post "{{ object.title }}"</h2>
+      <button type="submit" class="btn btn-outline-danger">Yes, Delete</button>
+      <a class="btn btn-outline-secondary" href="{% url 'post-detail' object.id %}">Cancel</a>
+    </form>
+    
+  </div>
+</div>
+{% endblock %}
