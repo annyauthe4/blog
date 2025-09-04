@@ -23,8 +23,10 @@ header {
    background: white;
     color: black;
     padding: 1rem 2rem;
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    width: 100%;
     z-index: 1000;
     border-bottom: 2px solid gray;
 }
@@ -93,7 +95,7 @@ background: #0A3142;
 main {
     flex: 1; /* Pushes footer down */
     max-width: 900px;
-    margin: 2rem auto;
+    margin: 5rem auto;
     padding: 0 1rem;
 }
 

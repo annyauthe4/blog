@@ -1,6 +1,7 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
+    <h1 class="mb-3">Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
     {% for post in posts %}
         <article class="post-card mb-5 p-4 shadow-sm" data-aos="fade-up" data-aos-easing="ease-in-sine">
                 <!-- Title + Author -->
@@ -9,11 +10,11 @@
                                 alt="{{ post.author.username }}" 
                                 class="rounded-circle author-img">
                         <div class="ms-3">
-							<h2 class="post-title mb-1"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-							<small class="text-muted">
-									Posted on {{ post.date_posted|date:"F d, Y" }} by
-							</small>
-							<a class="ml-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+                                <h2 class="post-title mb-1"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+                                <small class="text-muted">
+                                        Posted on {{ post.date_posted|date:"F d, Y" }} by
+                                </small>
+                                <a class="ml-2" href="{% url 'user-posts' post.author.username %}">{{ post.author.username }}</a>
                         </div>
                 </div>
 
