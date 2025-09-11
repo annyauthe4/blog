@@ -20,8 +20,11 @@
 
                 <!-- Post content/excerpt -->
                 <p class="post-content">
-                {{ post.content|truncatewords:40 }}
+                {{ post.content|safe }}
                 </p>
+                {% if post.pics and post.pics.url %}
+                        <img src="{{ post.pics.url }}">
+                {% endif %}
       </article>
     {% endfor %}
 	{% if is_paginated %}

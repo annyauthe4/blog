@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
+    'django_bleach',
     'crispy_forms',
     'crispy_bootstrap5',
     'django.contrib.admin',
@@ -127,6 +128,23 @@ MEDIA_URL = '/media/'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
+BLEACH_ALLOWED_TAGS = [
+    "p", "b", "i", "u", "em", "strong", "a", "mark", "small", "code", "span"
+]
+
+# Allowed HTML attributes (e.g., href for links, style for inline colors)
+BLEACH_ALLOWED_ATTRIBUTES = {
+    "*": ["style"],   # allow inline style on any tag
+    "a": ["href", "title"],
+    "span": ["style"],
+}
+
+# Allowed CSS properties
+BLEACH_ALLOWED_STYLES = ["color", "font-weight", "text-decoration"]
+
+# Strip disallowed tags instead of escaping them
+BLEACH_STRIP_TAGS = True
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -135,3 +153,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'blog-home'
 LOGIN_URL = 'login'
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get("EMAIL_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_PASS")
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
