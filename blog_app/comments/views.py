@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView
 from django.http import JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import csrf_exempt
@@ -31,6 +31,10 @@ class CommentListView(ListView):
             )
             .order_by("-interaction_count", "-created_at")
         )
+
+
+class CommentDetailView(DetailView):
+    model = Comment
 
 
 @method_decorator(csrf_exempt, name="dispatch")
