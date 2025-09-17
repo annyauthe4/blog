@@ -20,11 +20,14 @@ from django.contrib.auth.views import LogoutView
 from django.urls import path, include
 from users import views as users_views
 from django.conf import settings
+from likes.views import ToggleLikeView
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
+    path('posts/', include('comments.urls')),
+    path("likes/toggle/<int:post_id>/", ToggleLikeView.as_view(), name="like-toggle"),
     path('register/', users_views.register, name='register'),
     path('profile/', users_views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),

@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'comments.apps.CommentsConfig',
+    'likes.apps.LikesConfig',
     'users.apps.UsersConfig',
     'django_bleach',
     'crispy_forms',

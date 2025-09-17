@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<ul class="list-unstyled">
+  {% for comment in comments %}
+    <li class="mb-3 p-2 border rounded">
+      <strong>{{ comment.author.username }}</strong>
+      <small class="text-muted">{{ comment.created_at|date:"M d, Y H:i" }}</small>
+      <p class="mt-2">{{ comment.content }}</p>
+    </li>
+  {% empty %}
+    <li class="text-muted">No comments yet. Be the first to comment!</li>
+  {% endfor %}
+</ul>
+{% endblock %}

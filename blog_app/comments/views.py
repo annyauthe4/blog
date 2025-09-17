@@ -2,8 +2,6 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, CreateView, DetailView
 from django.http import JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.decorators.csrf import csrf_exempt
-django.utils.decorators import method_decorator
 
 from blog.models import Post
 from .models import Comment
@@ -35,9 +33,10 @@ class CommentListView(ListView):
 
 class CommentDetailView(DetailView):
     model = Comment
+    template = ""
+    context_object_name = "comment"
 
 
-@method_decorator(csrf_exempt, name="dispatch")
 class CommentCreateView(LoginRequiredMixin, CreateView):
     """Create a new comment via AJAX"""
     model = Comment
