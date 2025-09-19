@@ -10,7 +10,7 @@
                                 alt="{{ post.author.username }}" 
                                 class="rounded-circle author-img">
                         <div class="ms-3">
-                                <h2 class="post-title mb-1"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+                                <h2 class="post-title mb-1"><a class="title-anchor" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
                                 <small class="text-muted">
                                         Posted on {{ post.date_posted|date:"F d, Y" }} by
                                 </small>

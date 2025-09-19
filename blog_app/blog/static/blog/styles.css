@@ -121,6 +121,9 @@ main {
   font-family: "Times New Roman", serif;
   color: #222;
 }
+.title-anchor {
+  text-decoration: none;
+}
 
 .post-content {
   margin-top: 1rem;

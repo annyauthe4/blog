@@ -14,7 +14,7 @@ class ToggleLikeView(View):
         """Get session key or IP as identifier."""
         if not request.session.session_key:
             request.session.create()
-        return request.session.session_key or request.META.get("REMOTE_ADDR")
+        return request.session.session_key
 
     def post(self, request, post_id, *args, **kwargs):
         post = get_object_or_404(Post, id=post_id)
@@ -24,7 +24,8 @@ class ToggleLikeView(View):
         like, created = Like.objects.get_or_create(
             content_type=content_type,
             object_id=post.id,
-            defaults={"session_key": identifier},
+            session_key=identifier,
+            defaults={"ip_address": request.META.get("REMOTE_ADDR")},
         )
 
         if not created:  # already liked → unlike
