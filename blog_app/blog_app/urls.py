@@ -23,9 +23,11 @@ from django.conf import settings
 from likes.views import ToggleLikeView
 from django.conf.urls.static import static
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
+    path('api/', include('blog.urls')),
     path('posts/', include('comments.urls')),
     path("likes/toggle/<int:post_id>/", ToggleLikeView.as_view(), name="like-toggle"),
     path('register/', users_views.register, name='register'),

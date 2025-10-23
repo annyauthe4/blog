@@ -47,16 +47,22 @@ document.addEventListener("DOMContentLoaded", function() {
       })
       .then(res => res.json())
       .then(data => {
-        document.getElementById("comment-count").textContent = data.comments_count;
+        console.log(data, 'twale')
+        // document.getElementById("comment-count").textContent = data.comments_count;
 
-        const newComment = `
-          <li class="list-group-item">
-            <strong>${data.user}</strong>
-            <p>${data.content}</p>
-          </li>`;
-        document.getElementById("comment-list").insertAdjacentHTML("afterbegin", newComment);
+        // const newComment = `
+        //   <li class="list-group-item d-flex justify-content-between align-items-start">
+        //         <div>
+        //                 <strong>${data.user}</strong>
+        //                 <p>${data.content}</p>
+        //         </div>
+        //         <small class="text-muted">${data.created_at}</small>
+        //   </li>`;
+        // document.getElementById("comment-list").insertAdjacentHTML("afterbegin", newComment);
 
-        commentForm.reset();
+        commentForm.value = '';
+        location.reload(); document.getElementById("comment-list").scrollIntoView({ behavior: "smooth" });
+        
       })
       .catch((err) => console.error("Comment submission failed:", err));
     });

@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import (
+    ListView, CreateView, DetailView, DeleteView)
 from django.http import JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -45,19 +46,46 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         """Validate comment form"""
-        post_id = self.kwargs["post_id"]
-        post = get_object_or_404(Post, id=post_id)
+        post = get_object_or_404(Post, id=self.kwargs["post_id"])
+
         form.instance.author = self.request.user
-        form.instance.post = post
+        form.instance.post = get_object_or_404(Post, id=self.kwargs["post_id"])
         self.object = form.save()
 
+        # Updated count
+        comments_count = post.comments.count()
+
+        comments = Comment.get_comments_for_post(self.kwargs["post_id"])
+
         return JsonResponse({
-            "id": self.object.id,
-            "author": self.object.author.username,
-            "content": self.object.content,
-            "created_at": self.object.created_at.strftime("%Y-%m-%d %H:%M"),
+                "success": True,
+                "comments": [
+                        {
+                        "id": self.object.id,
+                        "user": self.object.author.username,
+                        "content": self.object.content,
+                        "comments_count": comments_count,
+                        "created_at": self.object.created_at.strftime("%Y-%m-%d %H:%M"),
+                        }
+                        for c in comments
+                ]
         })
 
 
     def form_invalid(self, form):
         return JsonResponse({"error": form.errors}, status=400)
+
+
+# class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+#     model = Comment
+#     success_url = "<int:post_id>/comments/"
+
+#     def post(self, request, pk):
+#         if not request.user.is_authenticated:
+#             return HttpResponseForbidden("Login required to delete")
+
+#         comment = get_object_or_404(Comment, pk=pk)
+#         if request.user == comment.author or request.user.is_staff:
+#             comment.delete()
+#             return JsonResponse({"success": True, "id": pk})
+#         return HttpResponseForbidden("You cannot delete this comment")

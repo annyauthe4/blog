@@ -11,5 +11,10 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     
+    @classmethod
+    def get_comments_for_post(cls, post_id):
+        return cls.objects.filter(post_id=post_id).order_by("-created_at")
+
+    
     def __str__(self):
         return f"{self.author.username} on {self.post}"

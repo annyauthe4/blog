@@ -1,0 +1,27 @@
+# Core
+Django>=4.2,<5.0
+
+# Database
+psycopg2-binary>=2.9
+
+# Static files and WSGI server for production
+gunicorn>=21.2
+
+# Images
+Pillow>=10.0
+
+# Security (HTML sanitization)
+django-bleach>=3.0
+
+# Forms
+django-crispy-forms>=2.0
+crispy-bootstrap5>=0.7
+
+# Env management
+# django-environ>=0.11
+python-decouple>=3.8
+
+# Optional but recommended
+dj-database-url>=2.1
+
+djangorestframework==3.15.2
