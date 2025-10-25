@@ -36,6 +36,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'rest_framework',
+    'cloudinary',
+    'cloudinary_storage',
     'comments.apps.CommentsConfig',
     'likes.apps.LikesConfig',
     'users.apps.UsersConfig',
@@ -132,6 +134,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# Configure Cloudinary
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': config('CLOUDINARY_API_KEY'),
+    'API_SECRET': config('CLOUDINARY_API_SECRET'),
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 

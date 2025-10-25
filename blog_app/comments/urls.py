@@ -1,13 +1,14 @@
-from django.urls import path
-from .views import (
-        CommentListView,
-        CommentCreateView,
-        CommentDetailView
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import CommentViewSet
+
+router = DefaultRouter()
+router.register(
+    r'posts/(?P<post_id>\d+)/comments',
+    CommentViewSet,
+    basename='post-comments'
 )
 
-
 urlpatterns = [
-    path("<int:post_id>/comments/", CommentListView.as_view(), name="comment-list"),
-    path("<int:post_id>/comments/add/", CommentCreateView.as_view(), name="comment-add"),
-    path("<int:post_id>/comments/<int:pk>/", CommentDetailView.as_view(), name="comment-detail"),
+    path('', include(router.urls)),
 ]
