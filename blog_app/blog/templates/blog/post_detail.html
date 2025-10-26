@@ -2,204 +2,39 @@
 {% load static %}
 
 {% block content %}
-<article class="post-card mb-5 p-4 shadow-sm">
-        <div class="d-flex justify-content-between align-items-center  ">
+<article class="post-card mb-5 p-4 shadow-sm" id="post-container" data-post-id="{{ post_id }}">
+  <!-- Post will be dynamically loaded here -->
+  <div id="post-content" class="mb-4">
+    <p class="text-center text-muted">Loading post...</p>
+  </div>
 
-                <div class="d-flex align-items-center mb-2">
-                        <img src="{{ object.author.profile.image.url }}" alt="{{ object.author.username }}"
-                                class="rounded-circle author-img">
-                        <div class="ms-3">
-                                <h2 class="post-title mb-1">{{ object.title }}</h2>
-                                <small class="text-muted">
-                                        Posted on {{ object.date_posted|date:"F d, Y" }} by
-                                </small>
-                                <a class="ml-2"
-                                        href="{% url 'user-posts' object.author.username %}">{{object.author.username}}</a>
-                        </div>
-                </div>
-                {% if object.author == user %}
-                <!-- <div>
-                                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
-                                        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
-                                  </div> -->
-                <div class="d-flex gap-2">
-                        <!-- Edit Button -->
-                        <a href="{% url 'post-update' object.id %}"
-                                class="btn btn-primary btn-sm d-flex align-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-pencil me-1" viewBox="0 0 16 16">
-                                        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 
-                                 3a.5.5 0 0 1 0 .708l-10 
-                                 10a.5.5 0 0 1-.168.11l-5 
-                                 2a.5.5 0 0 1-.65-.65l2-5a.5.5 
-                                 0 0 1 .11-.168l10-10zM11.207 
-                                 2.5 13.5 4.793 14.793 
-                                 3.5 12.5 1.207 11.207 2.5zm1.586 
-                                 3L10.5 3.207 4 9.707V10h.5a.5.5 
-                                 0 0 1 .5.5v.5h.5a.5.5 0 0 
-                                 1 .5.5v.5h.293l6.5-6.5z" />
-                                </svg>
-                                Edit
-                        </a>
+  <!-- Like + Comment Buttons -->
+  <div class="d-flex justify-content-start gap-3 mb-4" id="post-actions">
+    <button id="like-btn" class="btn btn-outline-primary position-relative">
+      ❤️ <span id="like-count">0</span>
+    </button>
 
-                        <!-- Delete Button -->
-                        <a href="{% url 'post-delete' object.id %}" data-bs-target="#deleteModal-{{ object.id }}"
-                                data-bs-toggle="modal" class="btn btn-danger btn-sm d-flex align-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-trash me-1" viewBox="0 0 16 16">
-                                        <path d="M5.5 5.5A.5.5 0 0 1 6 
-                                 5h4a.5.5 0 0 1 .5.5v7a.5.5 
-                                 0 0 1-1 0V6H6v6.5a.5.5 
-                                 0 0 1-1 0v-7z" />
-                                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 
-                                 2 0 0 1-2 2H5a2 2 0 0 
-                                 1-2-2V4h-.5a1 1 0 0 
-                                 1 0-2h3a1 1 0 0 1 1-1h4a1 
-                                 1 0 0 1 1 1h3a1 1 0 0 
-                                 1 1 1zM4.118 4 4 4.059V13a1 
-                                 1 0 0 0 1 1h6a1 1 0 0 0 
-                                 1-1V4.059L11.882 4H4.118zM2.5 
-                                 3V4h11V3h-11z" />
-                                </svg>
-                                Delete
-                        </a>
-                        <!-- Modal -->
-                        <div class="modal fade" id="deleteModal-{{ object.id }}" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                        <form method="POST" action="{% url 'post-delete' object.id %}">
-                                {% csrf_token %}
-                                <div class="modal-header">
-                                        <h5 class="modal-title text-danger">Confirm Delete</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                        Are you sure you want to delete "<b>{{ object.title }}</b>"?</p>
-                                </div>
-                                <div class="modal-footer">
-                                        <a class="btn btn-outline-secondary" data-bs-dismiss="modal" href="{% url 'post-detail' object.id %}">Cancel</a>
-                                        <button type="submit" class="btn btn-danger">Yes, Delete</button>
-                                </div>
-                        </form>
-                        </div>
-                        </div>
-                        </div>
-                </div>
-                {% endif %}
+    <button class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#comments-section">
+      💬 Comments (<span id="comment-count">0</span>)
+    </button>
+  </div>
 
-        </div>
+  <!-- Comments Section -->
+  <div id="comments-section" class="collapse mt-4">
+    <h5>Comments</h5>
+    <ul id="comment-list" class="list-group mb-3">
+      <li class="list-group-item text-muted text-center">Loading comments...</li>
+    </ul>
 
-        <!-- Post content -->
-        <div>
-                {% if object.pics and object.pics.url %}
-                <img src="{{ object.pics.url }}" alt="{{ object.title }}"
-                        class="w-100 object-fit-cover h-75 mt-3 mb-5 rounded">
-                {% endif %}
-                <p id="message" data-text="{{ object.content }}">{{ object.content|safe }}</p>
-
-        </div>
- 
-<div class="small d-flex justify-content-start">
-        <a href="#!" class="d-flex align-items-center me-3">
-                <i class="far fa-thumbs-up me-2"></i>
-                <p class="mb-0">Like</p>
-        </a>
-        <a href="#!" class="d-flex align-items-center me-3">
-                <i class="far fa-comment-dots me-2"></i>
-                <p class="mb-0">Comment</p>
-        </a>
-        <a href="#!" class="d-flex align-items-center me-3">
-                <i class="fas fa-share me-2"></i>
-                <p class="mb-0">Share</p>
-        </a>
-</div>
-
-        <div class="d-flex justify-content-start gap-4 mt-4">
-                <!-- Like Button -->
-                <!-- <button id="like-btn" data-post-id="{{ object.id }}" class="like-btn {% if has_liked %}btn btn-primary{% else %}btn btn-outline-primary{% endif %}">
-                               
-         <span id="like-count">{{ object.likes_count }}</span>
-                        </button> -->
-        
-                <button type="button" data-post-id="{{ object.id }}"
-                        class="like-btn {% if has_liked %}btn btn-primary{% else %}btn btn-outline-primary{% endif %} position-relative">
-        
-                        {% if has_liked %}
-                        <!-- Filled like (heart) -->
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" role="img"
-                                aria-label="Like (filled)">
-                                <path fill="currentColor"
-                                        d="M12.1 21.4s-7.2-4.9-9.2-8.2C1.2 10.9 2.4 7.5 5.7 6.5c2.1-.6 4.1.2 5.3 1.9.9-1.4 2.6-2.4 4.6-1.9 3.2.9 4.3 4.4 2.8 6.7-2 3.3-9.3 8-9.3 8z" />
-                        </svg>
-                        {% else %}
-                        <!-- Outline like (heart) -->
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" role="img"
-                                aria-label="Like (outline)">
-                                <path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M12.1 21.4s-7.2-4.9-9.2-8.2C1.2 10.9 2.4 7.5 5.7 6.5c2.1-.6 4.1.2 5.3 1.9.9-1.4 2.6-2.4 4.6-1.9 3.2.9 4.3 4.4 2.8 6.7-2 3.3-9.3 8-9.3 8z" />
-                        </svg>
-                        {% endif %}
-        
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                {{ object.comments_count }}
-                                <span class="visually-hidden">Comment</span>
-                        </span>
-                </button>
-        
-                <button type="button" data-bs-toggle="collapse" data-bs-target="#comments-section"
-                        class="like-btn {% if has_liked %}btn btn-primary{% else %}btn btn-outline-primary{% endif %} position-relative">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" role="img"
-                                aria-label="Comment (outline)">
-                                <path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                        </svg>
-        
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                {{object.comments_count}}
-                                <span class="visually-hidden">Comment</span>
-                        </span>
-                </button>
-        </div>
-
-        <!-- Comments Section -->
-        <div id="comments-section" class="collapse mt-4">
-                <h5>Comments</h5>
-                <ul id="comment-list" class="list-group mb-3">
-                {% for comment in comments %}
-                                <li class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="d-flex align-items-center gap-3">
-                                                <div class="">
-                                                        <img class="rounded-circle author-img" src="{{ comment.author.profile.image.url }}" alt="{{ comment.author.username }}">
-                                                </div>
-                                                <div>
-                                                        <p class="fs-6 fw-bold mb-0">{{ comment.author.username }}</p>
-                                                        <p>{{ comment.content }}</p>
-                                                </div>
-                                        </div>
-                                <small class="text-muted">{{ comment.created_at|date:"M d, Y H:i" }}</small>
-                                </li>
-                {% empty %}
-                        <li class="list-group-item">No comments yet.</li>
-                {% endfor %}
-                </ul>
-
-                {% if user.is_authenticated %}
-                <form id="comment-form" 
-                        action="javascript:void(0);"
-                        method="post"
-                        data-post="{{ object.id }}">
-                        {% csrf_token %}
-                        <div class="input-group">
-                        <input type="text" name="content" class="form-control" placeholder="Add a comment..." required>
-                        <button class="btn btn-primary" type="submit" >Comment</button>
-                        </div>
-                </form>
-                {% else %}
-                <p class="text-muted">Login to add a comment.</p>
-                {% endif %}
-        </div>
+    {% if user.is_authenticated %}
+    <form id="comment-form" class="input-group" data-post="">
+      {% csrf_token %}
+      <input type="text" name="content" class="form-control" placeholder="Add a comment..." required>
+      <button class="btn btn-primary" type="submit">Comment</button>
+    </form>
+    {% else %}
+    <p class="text-muted">Login to add a comment.</p>
+    {% endif %}
+  </div>
 </article>
-
-{% endblock content %}
+{% endblock %}
