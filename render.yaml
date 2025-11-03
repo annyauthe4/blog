@@ -2,7 +2,7 @@ services:
   - type: web
     name: blog-app
     env: python
-    rootDir: .
+    rootDir: blog
     plan: free
     region: oregon
 
