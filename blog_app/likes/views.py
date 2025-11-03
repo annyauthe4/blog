@@ -1,13 +1,13 @@
-from django.shortcuts import get_object_or_404
-from django.http import JsonResponse
-from django.views import View
+from rest_framework.views import APIView 
+from rest_framework.response import Response
+from rest_framework import status
 from django.contrib.contenttypes.models import ContentType
 
 from blog.models import Post
 from .models import Like
 
 
-class ToggleLikeView(View):
+class ToggleLikeAPIView(APIView):
     """Toggle a like for a post (no login required)."""
 
     def _get_identifier(self, request):
@@ -36,4 +36,11 @@ class ToggleLikeView(View):
 
         count = Like.objects.filter(content_type=content_type, object_id=post.id).count()
 
-        return JsonResponse({"liked": liked, "count": count})
+        return Response(
+            {
+                "liked": liked,
+                "count": count,
+                "post_id": post.id,
+            },
+            status=status.HTTP_200_ok,
+        )

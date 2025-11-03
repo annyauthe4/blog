@@ -15,5 +15,5 @@ services:
         value: "False"
 
 databases:
-  - name: my-postgres-db
+  - name: blog-db
     plan: free

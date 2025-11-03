@@ -1,203 +1,58 @@
-/* Reset & Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    height: 100%;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-    font-family: "Segoe UI", Tahoma, sans-serif;
-    line-height: 1.6;
-    color: #222;
-    background-color: rgba(249, 249, 249, 1);
-}
-
-/* Header */
+/* ===============================
+   HEADER & NAVIGATION (Fixed width issue)
+================================= */
 header {
-   background: white;
-    color: black;
-    padding: 1rem 2rem;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    border-bottom: 2px solid gray;
+  background: white;
+  color: black;
+  padding: 1rem 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0; /* Ensures it stretches across the entire viewport */
+  width: 100vw; /* Full viewport width */
+  z-index: 1000;
+  border-bottom: 2px solid #ccc;
+  box-sizing: border-box;
 }
 
+/* Prevents horizontal scroll due to width mismatch */
+body {
+  overflow-x: hidden;
+}
+
+/* Ensure the nav fills the header fully */
 header nav {
-    display: flex;
-    justify-content: space-between; /* Left and right separation */
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  /* max-width: 1200px; Centered container for content */
+  /* margin: 0 auto; */
 }
 
 .nav-left, .nav-right {
-    display: flex;
-    gap: 1.5rem;
-}
-.nav-left a {
-    color: #000;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
 }
 
-.nav-left a:hover {
-    color: #0A3142;
-    /* color: #fff; */
-}
+/* Fix link appearance */
+.nav-left a,
 .nav-right a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 500;
-    transition: background 0.3s ease, color 0.3s ease;
-    padding: 0.4rem 0.8rem;
-    border-radius: 5px;
+  text-decoration: none;
+  font-weight: 500;
+  color: #000;
+  transition: color 0.3s ease, background 0.3s ease;
+}
+
+/* Hover effects */
+.nav-left a:hover {
+  color: #0A3142;
 }
 
 .nav-right a:hover {
-    background: #0A3142;
-    color: #fff;
-}
-
-.register-btn {
-    background: #0A3142;
-    color: #fff;
-    font-weight: bold;
-
-    border: 2px solid #0A3142;
-}
-
-.register-btn:hover {
-color: white;
-}
-.logout-btn {
-  background:white;
-  color: #0A3142; /* same as nav links */
-  font: inherit;
-  cursor: pointer;
-  padding: 0.4rem 0.8rem;
-  border-radius: 5px;
-   border: 2px solid #0A3142;
-}
-
-.logout-btn:hover {
-background: #0A3142;
-    color: #fff;}
-
-/* Main Content */
-main {
-    flex: 1; /* Pushes footer down */
-    max-width: 900px;
-    margin: 5rem auto;
-    padding: 0 1rem;
-}
-
-/* Blog Post Style */
-/* Author image beside title */
-.post-card {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-family: "Georgia", serif;
-}
-
-.author-img {
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  border: 2px solid #ccc;
-}
-
-.post-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  font-family: "Times New Roman", serif;
-  color: #222;
-}
-.title-anchor {
-  text-decoration: none;
-}
-
-.post-content {
-  margin-top: 1rem;
-  font-size: 1rem;
-  line-height: 1.7;
-  color: #333;
-}
-
-
-/* Footer */
-footer {
-    background: rgba(11, 11, 11);
-    color: #ccc;
-    text-align: center;
-    padding: 1rem 0;
-    margin-top: auto; /* Push footer to bottom */
-}
-
-footer p {
-    font-size: 0.9rem;
-}
-
-/* About Page Styles */
-.about-section {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-
-.about-container {
-    max-width: 800px;
-    margin: auto;
-    text-align: left;
-}
-
-.about-container h1 {
-    font-size: 2.2rem;
-    margin-bottom: 1rem;
-    color: #222;
-}
-
-.about-container h2 {
-    font-size: 1.5rem;
-    margin-top: 1.5rem;
-    color: #ff9800;
-}
-
-.about-container p {
-    margin-top: 0.5rem;
-    color: #555;
-    font-size: 1rem;
-    line-height: 1.7;
-}
-
-.about-image {
-    margin-top: 2rem;
-    text-align: center;
-}
-
-.about-image img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-    header nav {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    article h1 {
-        font-size: 1.5rem;
-    }
+  background: #0A3142;
+  color: #fff;
 }
