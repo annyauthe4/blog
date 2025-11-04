@@ -1,7 +1,7 @@
 // ===== main.js =====
 
 // Base API URL (adjust for your setup)
-const API_BASE = "http://127.0.0.1:8000/api/";
+const API_BASE = "https://blog-1-q1d5.onrender.com/api/";
 
 // Helper: Get stored JWT tokens from localStorage
 function getAccessToken() {
