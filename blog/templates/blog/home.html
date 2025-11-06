@@ -1,14 +1,15 @@
-{% extends 'blog/base.html' %}
+{% extends "blog/base.html" %}
 
 {% block content %}
   <h1 class="mb-4">Latest Posts</h1>
 
-  <div id="posts-container" class="row gy-4">
-    <!-- Posts will be dynamically injected here by JS -->
-  </div>
+  <div id="posts-container" class="row gy-4"></div>
 
-  <!-- Optional pagination controls -->
   <div class="mt-4 text-center">
     <button id="load-more" class="btn btn-outline-primary">Load More</button>
   </div>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => loadPosts());
+  </script>
 {% endblock %}

@@ -1,4 +1,5 @@
 from rest_framework import viewsets, permissions
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from django.shortcuts import get_object_or_404
@@ -18,6 +19,7 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all().order_by('-date_posted')
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]
+    parser_classes = [MultiPartParser, FormParser]
 
     def perform_create(self, serializer):
         """Assign logged-in user as author."""

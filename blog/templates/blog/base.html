@@ -3,50 +3,61 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>{% block title %}My Blog{% endblock %}</title>
 
     <!-- CSS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'blog/css/styles.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'blog/styles.css' %}">
-    <link rel="stylesheet" href="{% static 'users/auth.css' %}">
 </head>
+
 <body>
-    <!-- Header -->
 <header class="w-100 m-0 p-0">
-  <nav class="container-fluid d-flex justify-content-between align-items-center py-3 bg-dark text-light w-100 m-0">
+  <nav class="container-fluid d-flex justify-content-between align-items-center py-3 bg-dark text-light w-100">
+
+    <!-- Left links -->
     <div class="nav-left d-flex align-items-center">
-      <a href="home.html" class="text-light me-3 text-decoration-none">Home</a>
-      <a href="about.html" class="text-light me-3 text-decoration-none">About</a>
-      <a href="contact.html" class="text-light text-decoration-none">Contact</a>
+      <a href="/" class="text-light me-3 text-decoration-none">Home</a>
+      <a href="/about/" class="text-light me-3 text-decoration-none">About</a>
+      <a href="/contact/" class="text-light text-decoration-none">Contact</a>
     </div>
 
+    <!-- Right links controlled by JS -->
     <div class="nav-right d-flex align-items-center">
-      <a id="createPostLink" href="post_form.html" class="btn btn-outline-light btn-sm me-2 d-none">New Post</a>
-      <a id="profileLink" href="profile.html" class="btn btn-outline-light btn-sm me-2 d-none">Profile</a>
+      <a id="createPostLink" href="/post/new/" class="btn btn-outline-light btn-sm me-2 d-none">New Post</a>
+      <a id="profileLink" href="/profile/" class="btn btn-outline-light btn-sm me-2 d-none">Profile</a>
       <button id="logoutBtn" class="btn btn-danger btn-sm d-none">Logout</button>
-      <a id="loginLink" href="login.html" class="btn btn-outline-light btn-sm me-2">Login</a>
-      <a id="registerLink" href="register.html" class="btn btn-light btn-sm">Register</a>
+
+      <a id="loginLink" href="/login/" class="btn btn-outline-light btn-sm me-2">Login</a>
+      <a id="registerLink" href="/register/" class="btn btn-light btn-sm">Register</a>
+
+      <button id="mobile-toggle" class="mobile-toggle d-md-none">☰</button>
     </div>
+
   </nav>
 </header>
 
-<!-- Main Content -->
-<main class="container-fluid my-4 px-3 px-md-5">
-  {% block content %}
-  {% endblock %}
+<!-- Mobile menu -->
+<div id="mobile-menu" class="mobile-menu d-md-none"></div>
+<div id="overlay"></div>
+
+<!-- Main content -->
+<main class="container my-5">
+  {% block content %}{% endblock %}
 </main>
 
+<!-- Footer -->
+<footer class="text-center py-3 bg-light border-top">
+  <p>&copy; <span id="year"></span> My Blog.</p>
+</footer>
 
-    <!-- Footer -->
-    <footer class="text-center py-3 bg-light border-top">
-        <p>&copy; <span id="year"></span> My Blog. All rights reserved.</p>
-    </footer>
+<!-- JS -->
+<script src="{% static 'blog/js/utils.js' %}"></script>
+<script src="{% static 'users/js/auth.js' %}"></script>
+<script src="{% static 'blog/js/posts.js' %}"></script>
+<script src="{% static 'blog/js/comments.js' %}"></script>
+<script src="{% static 'blog/js/ui.js' %}"></script>
 
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{% static 'blog/interactions.js' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>AOS.init();</script>
+</body>
+</html>

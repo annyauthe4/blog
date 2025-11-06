@@ -1,0 +1,234 @@
+/* ============================================================
+   BASE RESET
+   ============================================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  line-height: 1.6;
+  color: #222;
+  background-color: #f9f9f9;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* ============================================================
+   HEADER & NAVIGATION (FULLY RESPONSIVE)
+   ============================================================ */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #0A3142;
+  color: white;
+  z-index: 1000;
+  border-bottom: 2px solid rgba(255,255,255,0.15);
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.9rem 1.2rem;
+  width: 100%;
+}
+
+/* NAV LEFT LINKS */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.nav-left a {
+  color: white;
+  font-weight: 500;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.nav-left a:hover {
+  color: #ffdd57;
+}
+
+/* NAV RIGHT BUTTONS */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.nav-right a,
+.nav-right button {
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* Mobile hamburger icon */
+#mobile-toggle {
+  display: none;
+  font-size: 1.7rem;
+  cursor: pointer;
+}
+
+/* MOBILE MENU (Hidden by default) */
+#mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: #0A3142;
+  padding: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+#mobile-menu a,
+#mobile-menu button {
+  padding: 0.7rem 0;
+  color: white;
+  border: none;
+}
+
+#mobile-menu a:hover {
+  color: #ffdd57;
+}
+
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
+main {
+  padding-top: 110px !important;
+  width: 100%;
+  flex: 1;
+}
+
+h1, h2, h3 {
+  color: #0A3142;
+}
+
+/* ============================================================
+   POSTS GRID (HOME PAGE)
+   ============================================================ */
+#posts-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.post-card {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding: 1.2rem;
+  transition: 0.3s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.post-card img {
+  border-radius: 50%;
+}
+
+.post-card h3 a {
+  text-decoration: none;
+  color: #0A3142;
+}
+
+.post-card h3 a:hover {
+  color: #ff8800;
+}
+
+/* Medium screens */
+@media (min-width: 768px) {
+  #posts-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+  #posts-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+
+/* ============================================================
+   POST DETAIL PAGE
+   ============================================================ */
+#post-content img {
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.like-btn {
+  cursor: pointer;
+}
+
+
+/* ============================================================
+   COMMENTS SECTION
+   ============================================================ */
+#comment-list img {
+  border-radius: 50%;
+}
+
+#comment-form input {
+  height: 45px;
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: #0A3142;
+  color: #eee;
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: auto;
+}
+
+footer p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+
+/* ============================================================
+   RESPONSIVE NAV (Mobile Breakpoint)
+   ============================================================ */
+@media (max-width: 768px) {
+  .nav-left,
+  .nav-right {
+    display: none;
+  }
+
+  #mobile-toggle {
+    display: block;
+    color: white;
+  }
+
+  #mobile-menu.active {
+    display: flex;
+  }
+
+  main {
+    padding-top: 130px !important; /* More space due to menu icon */
+  }
+}
