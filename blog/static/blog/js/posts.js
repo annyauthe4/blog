@@ -1,3 +1,10 @@
+document.addEventListener("DOMContentLoaded", loadPosts);
+document.addEventListener("click", function (e) {
+  if (e.target.closest(".like-btn")) {
+    toggleLike(e.target.closest(".like-btn").dataset.post);
+  }
+});
+
 async function loadPosts(page = 1) {
   const res = await fetch(`${API_BASE}posts/?page=${page}`);
   const data = await res.json();
