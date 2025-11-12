@@ -11,18 +11,25 @@ class UserSerializer(serializers.ModelSerializer):
 
 class UserRegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
+    profile_image = serializers.ImageField(required=False)
 
     class Meta:
         model = User
-        fields = ["id", "username", "email", "password"]
+        fields = ["username", "email", "password", "profile_image"]
 
     def create(self, validated_data):
+        profile_image = validated_data.pop("profile_image", None)
+
         user = User.objects.create_user(
             username=validated_data["username"],
             email=validated_data["email"],
             password=validated_data["password"]
         )
-        Profile.objects.create(user=user)
+
+        profile = Profile.objects.create(user=user)
+        if profile_image:
+            profile.image = profile_image
+            profile.save()
         return user
 
 

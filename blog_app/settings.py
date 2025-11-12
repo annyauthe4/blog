@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'likes.apps.LikesConfig',
     'users.apps.UsersConfig',
     'django_bleach',
+    'corsheaders',
     'crispy_forms',
     'crispy_bootstrap5',
     'django.contrib.admin',
@@ -61,6 +62,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -71,6 +73,16 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'blog_app.urls'
+
+CORS_ALLOW_ALL_ORIGINS = False
+
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
+    "https://blog-1-q1d5.onrender.com",
+]
+
+CORS_ALLOW_CREDENTIALS = True
 
 TEMPLATES = [
     {

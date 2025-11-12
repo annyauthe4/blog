@@ -60,21 +60,12 @@ async function loginUser(username, password) {
 // Supports profile picture!
 // =========================
 async function registerUser(form) {
-  const formData = new FormData();
-
-  formData.append("username", form.username.value);
-  formData.append("email", form.email.value);
-  formData.append("password", form.password.value);
-
-  // ✅ Include profile picture if uploaded
-  if (form.profile_image && form.profile_image.files.length > 0) {
-    formData.append("profile_image", form.profile_image.files[0]);
-  }
-
+  const formData = new FormData(form);
+  
   try {
-    const res = await fetch(`${API_BASE}users/`, {
+    const res = await fetch(`${API_BASE}users/register/`, {
       method: "POST",
-      body: formData,     // ✅ Multipart form (not JSON)
+      body: formData,
     });
 
     if (!res.ok) {
